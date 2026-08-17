@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  /* Editorial, mostly-neutral palette. Warm off-white paper, near-black ink,
+     one restrained accent (terracotta) used sparingly for primary actions —
+     status colors (kept/broken) are muted, not alarmist or "gamified." */
+  --color-paper: #faf9f6;
+  --color-paper-dim: #f1efe8;
+  --color-ink: #17140f;
+  --color-ink-faint: #6f6a5f;
+  --color-ink-faint-2: #a29c8c;
+  --color-line: #e3dfd3;
+  --color-line-strong: #c9c3b2;
+  --color-accent: #b65c36;
+  --color-accent-dim: #e9d8ce;
+  --color-kept: #3f6b4f;
+  --color-kept-dim: #dde7de;
+  --color-broken: #a2402f;
+  --color-broken-dim: #ecdad5;
+
+  /* System font stacks — swap for a self-hosted serif/grotesk pairing
+     (e.g. Fraunces + Inter) when you have network access to fetch fonts. */
+  --font-serif: ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-paper-dim: var(--color-paper-dim);
+  --color-ink: var(--color-ink);
+  --color-ink-faint: var(--color-ink-faint);
+  --color-ink-faint-2: var(--color-ink-faint-2);
+  --color-line: var(--color-line);
+  --color-line-strong: var(--color-line-strong);
+  --color-accent: var(--color-accent);
+  --color-accent-dim: var(--color-accent-dim);
+  --color-kept: var(--color-kept);
+  --color-kept-dim: var(--color-kept-dim);
+  --color-broken: var(--color-broken);
+  --color-broken-dim: var(--color-broken-dim);
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-accent-dim);
+  color: var(--color-ink);
+}
+
+/* Focus states should be visible and calm, not a glowing crypto-app ring. */
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+button {
+  cursor: pointer;
+}

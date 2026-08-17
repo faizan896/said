@@ -1,0 +1,57 @@
+import {
+  listHappeningNow,
+  listMostWitnessed,
+  listRecentlyKept,
+  listInteresting,
+} from "@db/queries";
+import { PromiseCardCompact } from "@/components/promise/promise-card";
+import type { PromiseWithMeta } from "@db/types";
+
+export const metadata = { title: "explore — said" };
+
+function Section({ title, promises }: { title: string; promises: PromiseWithMeta[] }) {
+  if (promises.length === 0) return null;
+  return (
+    <section className="mb-12">
+      <h2 className="mb-4 font-serif text-xl text-ink">{title}</h2>
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {promises.map((p) => (
+          <PromiseCardCompact key={p.id} promise={p} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export default function ExplorePage() {
+  const happeningNow = listHappeningNow(6);
+  const mostWitnessed = listMostWitnessed(6);
+  const keptTheirWord = listRecentlyKept(6);
+  const interesting = listInteresting(6);
+
+  const nothingAtAll =
+    happeningNow.length === 0 &&
+    mostWitnessed.length === 0 &&
+    keptTheirWord.length === 0 &&
+    interesting.length === 0;
+
+  return (
+    <div className="mx-auto max-w-3xl px-4 py-10 sm:py-16">
+      <h1 className="font-serif text-3xl text-ink sm:text-4xl">explore</h1>
+      <p className="mt-2 text-sm text-ink-faint">what people are putting on the record.</p>
+
+      <div className="mt-10">
+        {nothingAtAll ? (
+          <p className="py-10 text-sm text-ink-faint">nothing said yet.</p>
+        ) : (
+          <>
+            <Section title="happening now" promises={happeningNow} />
+            <Section title="most witnessed" promises={mostWitnessed} />
+            <Section title="kept their word" promises={keptTheirWord} />
+            <Section title="they said WHAT?" promises={interesting} />
+          </>
+        )}
+      </div>
+    </div>
+  );
+}

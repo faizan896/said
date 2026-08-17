@@ -1,0 +1,12 @@
+import { NextRequest, NextResponse } from "next/server";
+import { getProfileStats, resolveProfileHandle } from "@db/queries";
+
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: Promise<{ wallet: string }> }
+) {
+  const { wallet } = await params;
+  const address = resolveProfileHandle(wallet.toLowerCase()) ?? wallet.toLowerCase();
+  const stats = getProfileStats(address);
+  return NextResponse.json({ username: stats.username });
+}
