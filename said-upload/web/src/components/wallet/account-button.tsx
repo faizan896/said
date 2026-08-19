@@ -26,7 +26,7 @@ export function AccountButton() {
             /* user closed the sheet — nothing to do */
           });
         }}
-        className="text-xs text-ink-faint-2 underline decoration-transparent underline-offset-4 transition hover:text-ink hover:decoration-line-strong"
+        className="rounded-full px-3 py-1.5 text-xs text-paper/70 transition hover:bg-paper/10 hover:text-paper"
       >
         connect
       </button>
@@ -37,7 +37,7 @@ export function AccountButton() {
     <div className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="rounded-full border border-line px-3 py-1.5 text-sm text-ink hover:border-ink"
+        className="rounded-full px-3 py-1.5 text-sm text-paper/90 transition hover:bg-paper/10 hover:text-paper"
       >
         {username ?? shortenAddress(address)}
       </button>
