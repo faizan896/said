@@ -23,8 +23,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             needs a surface to sit on. The landing deliberately doesn't. */}
         <SceneBackdrop />
         <Providers>
-          <Header />
-          <main className="flex-1 pb-28 sm:pb-10">{children}</main>
+          <div className="relative z-10 flex flex-1 flex-col">
+            <Header />
+            <main className="flex-1 pb-28 sm:pb-10">{children}</main>
+          </div>
           <BottomNav />
         </Providers>
       </body>
