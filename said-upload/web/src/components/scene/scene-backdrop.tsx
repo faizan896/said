@@ -21,8 +21,11 @@ const srcSet = (ext: "avif" | "webp") =>
   WIDTHS.map((w) => `/bg/promise-stop-${w}.${ext} ${w}w`).join(", ");
 
 export function SceneBackdrop() {
+  // z-0 rather than a negative index: a negative z-index paints this layer
+  // behind the root canvas background, which drops the painting entirely.
+  // The app's own content is lifted to z-10 in the layout instead.
   return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[#2b2a26]">
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#2b2a26]">
       {/* On a portrait screen `cover` crops to the valley and loses the wall
           the promises are pinned to — the whole subject — so narrow screens
           anchor onto the wall rather than the centre of the painting. */}
