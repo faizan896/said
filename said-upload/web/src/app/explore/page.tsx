@@ -41,7 +41,7 @@ export default async function ExplorePage() {
     interesting.length === 0;
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 sm:py-16">
+    <div className="sheet mx-3 mt-2 mb-8 sm:mx-auto sm:mt-6 max-w-3xl px-5 py-8 sm:px-10 sm:py-12">
       <h1 className="font-serif text-3xl text-ink sm:text-4xl">explore</h1>
       <p className="mt-2 text-sm text-ink-faint">what people are putting on the record.</p>
 
