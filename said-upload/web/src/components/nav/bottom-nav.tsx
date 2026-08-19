@@ -48,8 +48,8 @@ export function BottomNav() {
   ];
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-paper/95 backdrop-blur sm:hidden">
-      <div className="mx-auto flex max-w-md items-center justify-between px-6 py-2">
+    <nav className="fixed inset-x-3 bottom-3 z-30 sm:hidden">
+      <div className="chip mx-auto flex max-w-md items-center justify-between rounded-full px-5 py-2">
         {items.slice(0, 2).map(({ href, label, icon: Icon }) => {
           const active = pathname === href;
           return (
@@ -58,7 +58,7 @@ export function BottomNav() {
               href={href}
               className={clsx(
                 "flex flex-col items-center gap-1 px-3 py-1.5 text-[11px]",
-                active ? "text-ink" : "text-ink-faint-2"
+                active ? "text-paper" : "text-paper/55"
               )}
             >
               <Icon active={active} />
@@ -69,7 +69,7 @@ export function BottomNav() {
 
         <Link
           href="/new"
-          className="-mt-6 flex h-12 w-12 items-center justify-center rounded-full bg-ink text-paper shadow-md"
+          className="-mt-5 flex h-12 w-12 items-center justify-center rounded-full bg-paper text-ink shadow-lg shadow-black/40"
           aria-label="make a promise"
         >
           <PlusIcon />
@@ -79,7 +79,7 @@ export function BottomNav() {
           href={profileHref}
           className={clsx(
             "flex flex-col items-center gap-1 px-3 py-1.5 text-[11px]",
-            pathname.startsWith("/u/") ? "text-ink" : "text-ink-faint-2"
+            pathname.startsWith("/u/") ? "text-paper" : "text-paper/55"
           )}
         >
           <ProfileIcon active={pathname.startsWith("/u/")} />
