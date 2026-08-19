@@ -58,32 +58,46 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* The sheet of paper on the table.
-   Near-opaque on purpose: the whole point of the app is that a promise is
-   legible, so the scene is allowed to be visible around the page but never
-   underneath the words. */
+/* A sheet of paper pinned over the painting.
+   Content-heavy pages (explore, a promise, a profile, the composer) sit on
+   one of these; the landing doesn't, because there the painting *is* the
+   page. Near-opaque on purpose — the art is allowed to surround a promise,
+   never to sit underneath its words. */
 .sheet {
-  background: color-mix(in srgb, var(--color-paper) 99%, transparent);
-  backdrop-filter: blur(6px);
+  background: color-mix(in srgb, var(--color-paper) 97%, transparent);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.35) inset,
-    0 30px 90px -20px rgba(0, 0, 0, 0.6),
-    0 4px 18px -6px rgba(0, 0, 0, 0.4);
+    0 1px 0 rgba(255, 255, 255, 0.4) inset,
+    0 30px 90px -20px rgba(0, 0, 0, 0.55),
+    0 4px 18px -6px rgba(0, 0, 0, 0.35);
 }
 
-@supports not (backdrop-filter: blur(3px)) {
+@supports not (backdrop-filter: blur(1px)) {
   .sheet {
     background: var(--color-paper);
   }
 }
 
-@keyframes sceneIn {
-  from {
-    opacity: 0;
+/* Small controls that float directly on the painting: the header, the mobile
+   tab bar, the ticker. Dark enough that paper-coloured text on top of them
+   clears contrast against any part of the art. */
+.chip {
+  background: rgba(24, 21, 17, 0.58);
+  backdrop-filter: blur(10px) saturate(1.1);
+  border: 1px solid rgba(250, 249, 246, 0.14);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .chip {
+    background: rgba(24, 21, 17, 0.85);
   }
-  to {
-    opacity: 1;
-  }
+}
+
+/* For the wordmark and any bare text laid straight on the painting. */
+.on-art {
+  color: var(--color-paper);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55), 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 ::selection {

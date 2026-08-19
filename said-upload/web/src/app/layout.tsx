@@ -19,18 +19,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className="h-full antialiased">
       <body className="flex min-h-full flex-col text-ink">
-        {/* The room. Everything below sits on paper, on a table, inside it. */}
+        {/* The painting sits behind everything; each page decides whether it
+            needs a surface to sit on. The landing deliberately doesn't. */}
         <SceneBackdrop />
         <Providers>
-          {/* A band of the street shows above the paper, and slivers of it
-              down either side — most of all on phones, where the sheet is
-              otherwise wide enough to hide the whole scene. */}
-          <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-2 pt-36 sm:px-6 sm:pt-10">
-            <div className="sheet flex min-h-[100svh] flex-1 flex-col rounded-t-lg">
-              <Header />
-              <main className="flex-1 pb-24 sm:pb-8">{children}</main>
-            </div>
-          </div>
+          <Header />
+          <main className="flex-1 pb-28 sm:pb-10">{children}</main>
           <BottomNav />
         </Providers>
       </body>
