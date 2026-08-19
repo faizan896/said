@@ -51,10 +51,39 @@ html {
 }
 
 body {
-  background: var(--color-paper);
+  /* No background here — the cafe scene sits behind everything and the
+     content rides on `.sheet` above it. */
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* The sheet of paper on the table.
+   Near-opaque on purpose: the whole point of the app is that a promise is
+   legible, so the scene is allowed to be visible around the page but never
+   underneath the words. */
+.sheet {
+  background: color-mix(in srgb, var(--color-paper) 99%, transparent);
+  backdrop-filter: blur(6px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 30px 90px -20px rgba(0, 0, 0, 0.6),
+    0 4px 18px -6px rgba(0, 0, 0, 0.4);
+}
+
+@supports not (backdrop-filter: blur(3px)) {
+  .sheet {
+    background: var(--color-paper);
+  }
+}
+
+@keyframes sceneIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 ::selection {
