@@ -44,7 +44,7 @@ export default async function PromisePage({ params }: Props) {
   const name = displayName(promise.creator_address, promise.creatorUsername);
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-10 sm:py-16">
+    <div className="sheet mx-3 mt-2 mb-8 sm:mx-auto sm:mt-6 max-w-2xl px-5 py-8 sm:px-10 sm:py-12">
       <p className="font-serif text-3xl leading-snug text-ink sm:text-4xl">
         {promise.statement}
       </p>
