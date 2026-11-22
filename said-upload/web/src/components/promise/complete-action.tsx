@@ -58,7 +58,7 @@ export function CompleteAction({
       return;
     }
     if (byteLength(proof) > MAX_PROOF_LENGTH) {
-      setValidationError(`Keep proof under ${MAX_PROOF_LENGTH} characters.`);
+      setValidationError(`Keep proof under ${MAX_PROOF_LENGTH} bytes — emoji and accented letters count as more than one.`);
       return;
     }
     try {

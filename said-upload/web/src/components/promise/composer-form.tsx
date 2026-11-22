@@ -54,7 +54,7 @@ export function ComposerForm() {
       return;
     }
     if (byteLength(trimmed) > MAX_STATEMENT_LENGTH) {
-      setValidationError(`Keep it under ${MAX_STATEMENT_LENGTH} characters.`);
+      setValidationError(`Keep it under ${MAX_STATEMENT_LENGTH} bytes — emoji and accented letters count as more than one.`);
       return;
     }
     if (!deadline || deadline.getTime() <= Date.now()) {
