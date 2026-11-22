@@ -22,7 +22,7 @@ export type WriteStage =
 // wagmi/viem error formatting.
 const CONTRACT_ERROR_COPY: Record<string, string> = {
   EmptyStatement: "Say something first.",
-  StatementTooLong: "That's too long — keep it under 280 characters.",
+  StatementTooLong: "That's too long — keep it under 280 bytes.",
   DeadlineNotInFuture: "Pick a deadline that's in the future.",
   DeadlineTooFar: "That deadline is too far out.",
   PromiseNotFound: "Couldn't find that promise.",
@@ -31,7 +31,7 @@ const CONTRACT_ERROR_COPY: Record<string, string> = {
   AlreadyWitnessed: "You've already witnessed this one.",
   PromiseNotActive:
     "This promise is past its deadline, so it can't be marked kept anymore — it's broken, on the record.",
-  ProofTooLong: "That proof is too long — keep it under 512 characters.",
+  ProofTooLong: "That proof is too long — keep it under 512 bytes.",
 };
 
 function friendlyError(err: unknown): string {

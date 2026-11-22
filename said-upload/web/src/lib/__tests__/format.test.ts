@@ -6,6 +6,7 @@ import {
   keptTimingLabel,
   isValidUrl,
   shortTxHash,
+  byteLength,
 } from "../format";
 
 describe("shortenAddress", () => {
@@ -90,5 +91,13 @@ describe("shortTxHash", () => {
   it("shortens a 32-byte tx hash", () => {
     const hash = `0x${"a".repeat(64)}`;
     expect(shortTxHash(hash)).toBe("0xaaaaaa…aaaaaa");
+  });
+});
+
+describe("byteLength", () => {
+  it("counts UTF-8 bytes the way Said.sol does", () => {
+    expect(byteLength("abc")).toBe(3);
+    expect(byteLength("وعدہ")).toBe(8);
+    expect(byteLength("🚀")).toBe(4);
   });
 });

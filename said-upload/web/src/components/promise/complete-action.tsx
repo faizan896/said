@@ -6,7 +6,7 @@ import { useAccount } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { useCompletePromise } from "@/lib/hooks/use-said-contract";
 import { MAX_PROOF_LENGTH } from "@/lib/constants";
-import { isValidUrl } from "@/lib/format";
+import { byteLength, isValidUrl } from "@/lib/format";
 
 const stageCopy: Record<string, string> = {
   connecting: "connecting…",
@@ -57,8 +57,8 @@ export function CompleteAction({
       setValidationError("That doesn't look like a valid URL.");
       return;
     }
-    if (proof.length > MAX_PROOF_LENGTH) {
-      setValidationError(`Keep proof under ${MAX_PROOF_LENGTH} characters.`);
+    if (byteLength(proof) > MAX_PROOF_LENGTH) {
+      setValidationError(`Keep proof under ${MAX_PROOF_LENGTH} bytes — emoji and accented letters count as more than one.`);
       return;
     }
     try {

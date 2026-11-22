@@ -144,6 +144,20 @@ d("queries (Postgres)", () => {
     it("returns null for an unknown username", async () => {
       expect(await q.resolveProfileHandle("nobody")).toBeNull();
     });
+
+    it("resolves a username that starts with 0x", async () => {
+      await q.ensureProfile(CREATOR);
+      await query("UPDATE profiles SET username = $1 WHERE address = $2", ["0xalex", CREATOR]);
+      expect(await q.resolveProfileHandle("0xalex")).toBe(CREATOR);
+    });
+  });
+
+  describe("getPromiseById", () => {
+    it("returns null for ids that can't be a promise id", async () => {
+      expect(await q.getPromiseById(NaN)).toBeNull();
+      expect(await q.getPromiseById(1.5)).toBeNull();
+      expect(await q.getPromiseById(99999999999)).toBeNull();
+    });
   });
 
   describe("feeds", () => {

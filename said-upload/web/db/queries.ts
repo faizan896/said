@@ -67,6 +67,8 @@ async function attachMeta(rows: PromiseRow[]): Promise<PromiseWithMeta[]> {
 // ---------------------------------------------------------------------
 
 export async function getPromiseById(id: number): Promise<PromiseWithMeta | null> {
+  // Ids come straight from the URL; anything outside INTEGER makes Postgres throw.
+  if (!Number.isInteger(id) || id < 1 || id > 2147483647) return null;
   const rows = await query<PromiseRow>("SELECT * FROM promises WHERE id = $1", [id]);
   if (rows.length === 0) return null;
   return (await attachMeta(rows))[0];
@@ -169,12 +171,13 @@ export async function getProfileStats(address: string) {
 
 /** `handle` can be a 0x address or a username; returns the canonical address. */
 export async function resolveProfileHandle(handle: string): Promise<string | null> {
-  if (handle.startsWith("0x")) return handle.toLowerCase();
+  // Usernames first: one like "0xalex" also starts with 0x.
   const rows = await query<{ address: string }>(
     "SELECT address FROM profiles WHERE username = $1",
     [handle]
   );
-  return rows[0]?.address ?? null;
+  if (rows[0]) return rows[0].address;
+  return handle.startsWith("0x") ? handle.toLowerCase() : null;
 }
 
 export async function getWitnesses(promiseId: number, limit = 50): Promise<WitnessRow[]> {
