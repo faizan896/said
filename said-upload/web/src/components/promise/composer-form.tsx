@@ -13,7 +13,7 @@ import {
   resolvePresetDeadline,
 } from "@/lib/constants";
 import { isContractDeployed, networkLabel } from "@/lib/chain";
-import { formatDate } from "@/lib/format";
+import { byteLength, formatDate } from "@/lib/format";
 
 const stageCopy: Record<string, string> = {
   connecting: "connecting wallet…",
@@ -41,7 +41,7 @@ export function ComposerForm() {
     return resolvePresetDeadline(preset);
   }, [preset, customDate]);
 
-  const remaining = MAX_STATEMENT_LENGTH - statement.length;
+  const remaining = MAX_STATEMENT_LENGTH - byteLength(statement);
   const isBusy = stage !== "idle" && stage !== "error" && stage !== "done";
 
   async function handleSubmit(e: React.FormEvent) {
@@ -53,7 +53,7 @@ export function ComposerForm() {
       setValidationError("Say something first.");
       return;
     }
-    if (trimmed.length > MAX_STATEMENT_LENGTH) {
+    if (byteLength(trimmed) > MAX_STATEMENT_LENGTH) {
       setValidationError(`Keep it under ${MAX_STATEMENT_LENGTH} characters.`);
       return;
     }

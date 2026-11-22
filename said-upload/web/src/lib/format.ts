@@ -50,6 +50,11 @@ export function keptTimingLabel(deadline: string | Date, completedAt: string | D
   return `kept ${days} days early`;
 }
 
+/** Said.sol limits statements and proofs in UTF-8 bytes, not characters. */
+export function byteLength(value: string): number {
+  return new TextEncoder().encode(value).length;
+}
+
 export function shortTxHash(hash: string): string {
   return `${hash.slice(0, 8)}…${hash.slice(-6)}`;
 }
